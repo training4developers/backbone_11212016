@@ -32,7 +32,7 @@ Breaks:
 ### Other Resources
 
 - [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
-- [SpeakingJS](http://speakingjs.com/es5/index.html)
+- [Speaking JavaScript](http://speakingjs.com/es5/index.html)
 - [JavaScript Air Podcast](http://javascriptair.podbean.com/)
 - [Backbone](http://backbonejs.org/)
 - [Underscore](http://underscorejs.org/)
