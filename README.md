@@ -28,7 +28,7 @@ Breaks:
 - [Eric's Blog](http://t4d.io/)
 - [WintellectNOW](https://www.wintellectnow.com/Home/Instructor?instructorId=EricGreene) - Special Offer Code: GREENE-2016
 - [Microsoft Virtual Academy](https://mva.microsoft.com/search/SearchResults.aspx#!q=Eric%20Greene&lang=1033)
-
+- [TopTal Videos (Underscore.js and JavaScript)](https://www.toptal.com/javascript/videos)
 ### Other Resources
 
 - [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)

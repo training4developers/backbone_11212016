@@ -1,63 +1,23 @@
 'use strict';
 
-let counter = 0;
+var youngMan = {
 
-counter++;
-setTimeout(function() {
-		console.log('1');
-		counter--;
-		if (counter === 0) {
-			doFinalCode();
-		}
-}, 3000);
+	propose: function() {
+		this.trigger('propose');
+	}
+};
 
-counter++;
-setTimeout(function() {
-		console.log('2');
-		counter--;
-		if (counter === 0) {
-			doFinalCode();
-		}
-}, 3000);
+var youngLady = { };
 
-counter++;
-setTimeout(function() {
-		console.log('3');
-		counter--;
-		if (counter === 0) {
-			doFinalCode();
-		}
-}, 3000);
+_.extend(youngMan, Backbone.Events);
+_.extend(youngLady, Backbone.Events);
 
-counter++;
-setTimeout(function() {
-		console.log('4');
-		counter--;
-		if (counter === 0) {
-			doFinalCode();
-		}
-}, 3000);
+// Object.assign(youngMan, Backbone.Events);
 
-// setTimeout(function() {
+youngLady.listenTo(youngMan, 'propose', function() {
 
-// 		console.log('first one');
+	console.log('should I say yet or no?');
 
-// 		setTimeout(function() {
+});
 
-// 					console.log('second one');
-
-// 					setTimeout(function() {
-
-// 							console.log('third one');
-
-// 							setTimeout(function() {
-
-// 									console.log('fourth one');
-
-// 							}, 3000);
-
-// 				}, 3000);
-
-// 		}, 3000);
-
-// }, 3000);
+youngMan.propose();

@@ -1,18 +1,36 @@
 'use strict';
 
-try {
 
-	var t = 10;
+var person = {
 
-	setTimeout(function() {
-		console.log(t);
-		console.log('timeout expired');
-		throw Error('something really went wrong...');
-	}, 0);
+	_firstName: '',
 
-	console.log('made it here...');
+	setFirstName: function(value) {
+		this._firstName = value;
+		this.trigger('change_first_name', {
+			newFirstName: this._firstName
+		});
+	},
 
-} catch(err) {
-	console.log('caught the error!');
-	console.log(err);
+	getFirstName: function() {
+		return this._firstName;
+	}
+
+};
+
+_.extend(person, Backbone.Events);
+
+function changeFirstNameHandler(data) {
+	console.dir(data);
 }
+
+person.on('change_first_name', changeFirstNameHandler);
+
+person.setFirstName('Bob');
+person.setFirstName('Jenny');
+
+person.off('change_first_name', changeFirstNameHandler);
+
+person.setFirstName('Ronald');
+person.setFirstName('Bob');
+//console.log(person.getFirstName());
