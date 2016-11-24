@@ -33,10 +33,42 @@ var ListView = Backbone.View.extend({
 	}
 });
 
+var ColorFormView = Backbone.View.extend({
+	tagName: 'form',
+	events: {
+		'click button': 'addColorHandler'
+	},
+
+	addColorHandler: function() {
+
+		this.trigger('new_color',{
+			color: this.$el.find('input').val()
+		});
+	},
+
+	render: function() {
+
+		var templateFn = _.template(`
+			<label>New Color</label>
+			<input type="text" name="new-color" id="new-color" value="">
+			<button type="button">Add Color</button>
+		`);
+
+		var html = templateFn();
+		this.$el.append(html);
+
+	}
+})
+
 var AppView = Backbone.View.extend({
 	id: 'app-view',
 
 	render: function() {
+
+		var view = this;
+
+		this.$el.empty();
+
 		this.$el.append('<h1>List of Colors</h1>');
 
 		var listView = new ListView({
@@ -45,6 +77,14 @@ var AppView = Backbone.View.extend({
 		listView.render();
 		this.$el.append(listView.el);
 
+		var colorFormView = new ColorFormView();
+		colorFormView.render();
+		this.$el.append(colorFormView.el);
+
+		colorFormView.on('new_color', function(data) {
+			console.log(data);
+			view.trigger('new_color', data);
+		});
 
 		// Template Based Approach
 		// var templateFn = _.template(`
@@ -69,21 +109,39 @@ var AppView = Backbone.View.extend({
 });
 // controller the flow of my application
 function AppController(rootElement) {
+
 	this.$rootElement = $(rootElement);
+
 }
 _.extend(AppController.prototype, Backbone.Events);
+
+
 AppController.prototype.start = function() {
+
+	var controller = this;
+
 	// initialize data
 	var colors = new ColorsCollection();
 	colors.add(new ColorModel({ name: 'red' }));
 	colors.add(new ColorModel({ name: 'white' }));
 	colors.add(new ColorModel({ name: 'yellow' }));
+
 	// load our initial view
 	var appView = new AppView({
 		collection: colors
 	});
 	appView.render();
 	this.$rootElement.append(appView.$el);
+
+	appView.on('new_color', function(data) {
+
+		colors.add(new ColorModel({ name: data.color }));
+		
+		appView.remove();
+		
+		appView.render();
+		controller.$rootElement.append(appView.$el);
+	});
 
 };
 
